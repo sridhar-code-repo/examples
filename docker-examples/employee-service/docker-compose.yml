@@ -1,0 +1,18 @@
+version: "3"
+services:
+  employee-service-db:
+    container_name: employee-service-db
+    image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+      - MYSQL_DATABASE=employee-service-db
+  employee-service:
+    container_name: employee-service
+    image: employee-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - employee-service-db
+networks:
+  employee-service-nw:
+    name: employee-service-nw
